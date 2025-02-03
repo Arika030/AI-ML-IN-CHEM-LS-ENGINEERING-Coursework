@@ -1,0 +1,44 @@
+2024-11-11T17:59:34 - INFO:chemprop.cli.main - Running in mode 'train' with args: {'smiles_columns': ['smiles'], 'reaction_columns': None, 'no_header_row': False, 'num_workers': 0, 'batch_size': 64, 'accelerator': 'auto', 'devices': 'auto', 'rxn_mode': 'REAC_DIFF', 'multi_hot_atom_featurizer_mode': 'V2', 'keep_h': False, 'add_h': False, 'molecule_featurizers': None, 'descriptors_path': None, 'no_descriptor_scaling': False, 'no_atom_feature_scaling': False, 'no_atom_descriptor_scaling': False, 'no_bond_feature_scaling': False, 'atom_features_path': None, 'atom_descriptors_path': None, 'bond_features_path': None, 'config_path': None, 'data_path': WindowsPath('C:/Users/User/Desktop/cleaned_critprop_data_with_all_info_expt.csv'), 'output_dir': WindowsPath('C:/Users/User/Desktop'), 'remove_checkpoints': False, 'checkpoint': None, 'freeze_encoder': False, 'model_frzn': None, 'frzn_ffn_layers': 0, 'ensemble_size': 1, 'message_hidden_dim': 300, 'message_bias': False, 'depth': 3, 'undirected': False, 'dropout': 0.0, 'mpn_shared': False, 'activation': 'RELU', 'aggregation': 'norm', 'aggregation_norm': 100, 'atom_messages': False, 'ffn_hidden_dim': 300, 'ffn_num_layers': 1, 'batch_norm': False, 'multiclass_num_classes': 3, 'weight_column': None, 'target_columns': ['Tb mean (K)', 'Tm mean (K)'], 'ignore_columns': None, 'no_cache': False, 'splits_column': None, 'task_type': 'regression', 'loss_function': None, 'v_kl': 0.0, 'eps': 1e-08, 'alpha': 0.1, 'metrics': None, 'tracking_metric': 'val_loss', 'show_individual_scores': False, 'task_weights': None, 'warmup_epochs': 2, 'init_lr': 0.0001, 'max_lr': 0.001, 'final_lr': 0.0001, 'epochs': 50, 'patience': None, 'grad_clip': None, 'class_balance': False, 'split': 'RANDOM', 'split_sizes': [0.8, 0.1, 0.1], 'split_key_molecule': 0, 'num_replicates': 1, 'num_folds': None, 'save_smiles_splits': True, 'splits_file': None, 'data_seed': 0, 'pytorch_seed': None}
+2024-11-11T17:59:34 - INFO:chemprop.cli.train - Pulling data from file: C:\Users\User\Desktop\cleaned_critprop_data_with_all_info_expt.csv
+2024-11-11T17:59:35 - WARNING:chemprop.data.splitting - The return type of make_split_indices has changed in v2.1 - see help(make_split_indices)
+2024-11-11T17:59:35 - INFO:chemprop.cli.train - train/val/test split_0 sizes: [4544, 568, 568]
+2024-11-11T17:59:35 - INFO:chemprop.cli.train - Train data: mean = [468.07161437 260.61380049] | std = [110.93112707  77.65495542]
+2024-11-11T17:59:36 - INFO:chemprop.cli.train - No loss function was specified! Using class default: <class 'chemprop.nn.metrics.MSE'>
+2024-11-11T17:59:36 - INFO:chemprop.cli.train - MPNN(
+  (message_passing): BondMessagePassing(
+    (W_i): Linear(in_features=86, out_features=300, bias=False)
+    (W_h): Linear(in_features=300, out_features=300, bias=False)
+    (W_o): Linear(in_features=372, out_features=300, bias=True)
+    (dropout): Dropout(p=0.0, inplace=False)
+    (tau): ReLU()
+    (V_d_transform): Identity()
+    (graph_transform): GraphTransform(
+      (V_transform): Identity()
+      (E_transform): Identity()
+    )
+  )
+  (agg): NormAggregation()
+  (bn): Identity()
+  (predictor): RegressionFFN(
+    (ffn): MLP(
+      (0): Sequential(
+        (0): Linear(in_features=300, out_features=300, bias=True)
+      )
+      (1): Sequential(
+        (0): ReLU()
+        (1): Dropout(p=0.0, inplace=False)
+        (2): Linear(in_features=300, out_features=2, bias=True)
+      )
+    )
+    (criterion): MSE(task_weights=[[1.0, 1.0]])
+    (output_transform): UnscaleTransform()
+  )
+  (X_d_transform): Identity()
+  (metrics): ModuleList(
+    (0): MSE(task_weights=[[1.0]])
+    (1): MSE(task_weights=[[1.0, 1.0]])
+  )
+)
+2024-11-11T18:02:09 - INFO:chemprop.cli.train - Test Set results:
+2024-11-11T18:02:09 - INFO:chemprop.cli.train - test/mse: 696.779296875
+2024-11-11T18:02:09 - INFO:chemprop.cli.train - Best model saved to 'C:\Users\User\Desktop\model_0\best.pt'
